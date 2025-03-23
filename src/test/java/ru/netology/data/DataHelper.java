@@ -47,7 +47,7 @@ public class DataHelper {
         return faker.name().firstName() + " " + faker.name().lastName() + "-" + faker.name().lastName();
     }
 
-    public static String getInvalidOwnerName(){
+    public static String getRuOwnerName(){
         var fake = new Faker(new Locale("ru_RU"));
         return fake.name().fullName();
     }
