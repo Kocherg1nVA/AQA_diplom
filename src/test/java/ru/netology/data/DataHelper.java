@@ -52,6 +52,10 @@ public class DataHelper {
         return fake.name().fullName();
     }
 
+    public static String getOwnerFirstName(){
+        return faker.name().firstName();
+    }
+
     public static String getCVC(){
         return faker.numerify("###");
     }

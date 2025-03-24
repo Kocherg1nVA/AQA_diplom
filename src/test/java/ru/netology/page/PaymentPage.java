@@ -1,10 +1,10 @@
 package ru.netology.page;
 
-import io.qameta.allure.Step;
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import ru.netology.data.DBHelper;
 import ru.netology.data.DataHelper;
 
 import java.time.Duration;
@@ -32,7 +32,6 @@ public class PaymentPage {
         debitTitle.shouldBe(visible);
     }
 
-    @Step("Оплата тура с карты со статусом APPROVED")
     public void paymentByApprovedCard(int plusMonth, int plusYear) {
         cardNumberField.setValue(DataHelper.getApprovedCardNumber());
         monthField.setValue(DataHelper.getMonth(plusMonth));
@@ -43,7 +42,6 @@ public class PaymentPage {
         successNotification.shouldBe(visible, Duration.ofSeconds(15));
     }
 
-    @Step("Оплата тура с карты со статусом DECLINED")
     public void paymentByDeclinedCard(int plusMonth, int plusYear) {
         cardNumberField.setValue(DataHelper.getDeclinedCardNumber());
         monthField.setValue(DataHelper.getMonth(plusMonth));
@@ -54,8 +52,7 @@ public class PaymentPage {
         unSuccessNotification.shouldBe(visible, Duration.ofSeconds(15));
     }
 
-    @Step("Отправить пустую заявку на приобретение тура")
-    public void emptyForm() {
+    public void emptyPaymentForm() {
         continueButton.click();
         invalidFormatFields.shouldBe(size(5));
         invalidFormatFields.get(0).shouldBe(visible);
@@ -63,11 +60,10 @@ public class PaymentPage {
         invalidFormatFields.get(2).shouldBe(visible);
         invalidFormatFields.get(3).shouldBe(visible);
         invalidFormatFields.get(4).shouldBe(visible);
-        invalidFormatFields.shouldBe(allMatch("все элементы содержат текст: Поле обязательно для заполнения",
+        invalidFormatFields.shouldBe(allMatch("все поля содержат текст: Поле обязательно для заполнения",
                 e -> e.getText().contains("Поле обязательно для заполнения")));
     }
 
-    @Step("Поле номер карты оставить не заполненным")
     public void emptyCardNumber(int plusMonth, int plusYear) {
         monthField.setValue(DataHelper.getMonth(plusMonth));
         yearField.setValue(DataHelper.getYear(plusYear));
@@ -78,7 +74,6 @@ public class PaymentPage {
                 .shouldBe(visible);
     }
 
-    @Step("Поле номер карты заполнить в формате 14 цифр")
     public void invalidCardNumber(int plusMonth, int plusYear) {
         cardNumberField.setValue(DataHelper.getInvalidCardNumber());
         monthField.setValue(DataHelper.getMonth(plusMonth));
@@ -89,7 +84,6 @@ public class PaymentPage {
         invalidFormatFields.shouldBe(size(1)).get(0).shouldHave(text("Неверный формат")).shouldBe(visible);
     }
 
-    @Step("Поле месяц оставить не заполненным")
     public void emptyMonthField(int plusYear) {
         cardNumberField.setValue(DataHelper.getApprovedCardNumber());
         yearField.setValue(DataHelper.getYear(plusYear));
@@ -100,7 +94,6 @@ public class PaymentPage {
                 .shouldHave(text("Поле обязательно для заполнения")).shouldBe(visible);
     }
 
-    @Step("В поле месяц уставить значение '13'")
     public void monthFieldMoreThanTwelve(int plusMonth, int plusYear) {
         cardNumberField.setValue(DataHelper.getApprovedCardNumber());
         monthField.setValue(DataHelper.getInvalidMonth(plusMonth));
@@ -112,7 +105,6 @@ public class PaymentPage {
                 .shouldHave(text("Неверно указан срок действия карты")).shouldBe(visible);
     }
 
-    @Step("В поле месяц уставить значение '00'")
     public void monthFieldLessThanOne(int plusYear) {
         cardNumberField.setValue(DataHelper.getApprovedCardNumber());
         monthField.setValue(DataHelper.getInvalidMonth(0));
@@ -124,7 +116,6 @@ public class PaymentPage {
                 .shouldHave(text("Неверно указан срок действия карты")).shouldBe(visible);
     }
 
-    @Step("Поле год оставить не заполненным")
     public void emptyYearField(int plusMonth) {
         cardNumberField.setValue(DataHelper.getApprovedCardNumber());
         monthField.setValue(DataHelper.getMonth(plusMonth));
@@ -135,7 +126,6 @@ public class PaymentPage {
                 .shouldHave(text("Поле обязательно для заполнения")).shouldBe(visible);
     }
 
-    @Step("Поле год заполнить значением прошлых лет")
     public void yearFieldLessThanCurrentYear(int plusMonth, int minusYear) {
         cardNumberField.setValue(DataHelper.getApprovedCardNumber());
         monthField.setValue(DataHelper.getMonth(plusMonth));
@@ -147,7 +137,6 @@ public class PaymentPage {
                 .shouldHave(text("Истёк срок действия карты")).shouldBe(visible);
     }
 
-    @Step("В поле год установить значение более 5 лет от текущего")
     public void yearFieldFiveMoreThanCurrent(int plusMonth, int plusYear) {
         cardNumberField.setValue(DataHelper.getApprovedCardNumber());
         monthField.setValue(DataHelper.getMonth(plusMonth));
@@ -159,7 +148,6 @@ public class PaymentPage {
                 .shouldHave(text("Неверно указан срок действия карты")).shouldBe(visible);
     }
 
-    @Step("Поле владелец оставить не заполненным")
     public void emptyOwnerField(int plusMonth, int plusYear) {
         cardNumberField.setValue(DataHelper.getApprovedCardNumber());
         monthField.setValue(DataHelper.getMonth(plusMonth));
@@ -170,7 +158,6 @@ public class PaymentPage {
                 .shouldHave(text("Поле обязательно для заполнения")).shouldBe(visible);
     }
 
-    @Step("Поле владелец заполнить фаилией через дефис")
     public void ownerNameByHyphen(int plusMonth, int plusYear) {
         cardNumberField.setValue(DataHelper.getApprovedCardNumber());
         monthField.setValue(DataHelper.getMonth(plusMonth));
@@ -181,7 +168,6 @@ public class PaymentPage {
         successNotification.shouldBe(visible, Duration.ofSeconds(15));
     }
 
-    @Step("Поле владелец заполнить символами на кириллице")
     public void ruOwnerName(int plusMonth, int plusYear) {
         cardNumberField.setValue(DataHelper.getApprovedCardNumber());
         monthField.setValue(DataHelper.getMonth(plusMonth));
@@ -192,7 +178,6 @@ public class PaymentPage {
         invalidFormatFields.shouldBe(size(1)).get(0).shouldHave(text("Неверный формат")).shouldBe(visible);
     }
 
-    @Step("Поле CVC/CVV оставить не заполненным")
     public void emptyCVCField(int plusMonth, int plusYear) {
         cardNumberField.setValue(DataHelper.getApprovedCardNumber());
         monthField.setValue(DataHelper.getMonth(plusMonth));
@@ -203,7 +188,6 @@ public class PaymentPage {
                 .shouldBe(visible);
     }
 
-    @Step("Поле CVC/CVV заполнить в формате - 2 цифры")
     public void invalidCVC(int plusMonth, int plusYear) {
         cardNumberField.setValue(DataHelper.getApprovedCardNumber());
         monthField.setValue(DataHelper.getMonth(plusMonth));
