@@ -25,8 +25,8 @@
         Успешных тест-кейсов: 11 шт. (50%)
         Неуспешных тест-кейсов: 11 шт. (50%)
 
-![allure_diagramm](https://disk.yandex.ru/i/ZwV9URZqQfiTsA)
-![allure_tests](https://disk.yandex.ru/i/2Ct1jlVfWDJAdA)
+![Allure Report — diplom](https://github.com/user-attachments/assets/a1506dcc-c271-4329-831a-2d91a8b11e05)
+![Allure Report — diplom_tests](https://github.com/user-attachments/assets/17517e29-4c94-4f28-a800-e91a1b783811)
 
 ## Общие рекомендации:
 
