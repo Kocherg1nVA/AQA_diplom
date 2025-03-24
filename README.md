@@ -30,7 +30,7 @@
         для mySQL:
         ./gradlew clean test -DurlDB="jdbc:mysql://localhost:3306/app"
 
-7. Создать Allure отчет и окрыть его в браузере по уолчанию с помощью терминала командой:
+7. Создать Allure отчет и открыть его в браузере по умолчанию с помощью терминала командой:
 
         ./gradlew allureServe
 
