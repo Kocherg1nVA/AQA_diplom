@@ -13,7 +13,7 @@ public class PaymentTest {
     PaymentPage debitPaymentPage;
 
     @BeforeAll
-    static void setUpAll(){
+    static void setUpAll() {
         SelenideLogger.addListener("allure", new AllureSelenide());
     }
 

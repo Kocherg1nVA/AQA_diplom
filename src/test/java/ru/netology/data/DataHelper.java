@@ -10,57 +10,57 @@ public class DataHelper {
 
     public static Faker faker = new Faker();
 
-    public static String getApprovedCardNumber(){
+    public static String getApprovedCardNumber() {
         return "4444 4444 4444 4441";
     }
 
-    public static String getDeclinedCardNumber(){
+    public static String getDeclinedCardNumber() {
         return "4444 4444 4444 4442";
     }
 
-    public static String getInvalidCardNumber(){
+    public static String getInvalidCardNumber() {
         return faker.numerify("##############");
     }
 
-    public static String getMonth(int month){
+    public static String getMonth(int month) {
         return LocalDate.now().plusMonths(month).format(DateTimeFormatter.ofPattern("MM"));
     }
 
-    public static String getInvalidMonth(int index){
+    public static String getInvalidMonth(int index) {
         var months = new String[]{"00", "13"};
         return months[index];
     }
 
-    public static String getYear(int year){
+    public static String getYear(int year) {
         return LocalDate.now().plusYears(year).format(DateTimeFormatter.ofPattern("yy"));
     }
 
-    public static String getPastYear(int pastYear){
+    public static String getPastYear(int pastYear) {
         return LocalDate.now().minusYears(pastYear).format(DateTimeFormatter.ofPattern("yy"));
     }
 
-    public static String getOwnerName(){
+    public static String getOwnerName() {
         return faker.name().fullName();
     }
 
-    public static String getOwnerNameByHyphen(){
+    public static String getOwnerNameByHyphen() {
         return faker.name().firstName() + " " + faker.name().lastName() + "-" + faker.name().lastName();
     }
 
-    public static String getRuOwnerName(){
+    public static String getRuOwnerName() {
         var fake = new Faker(new Locale("ru_RU"));
         return fake.name().fullName();
     }
 
-    public static String getOwnerFirstName(){
+    public static String getOwnerFirstName() {
         return faker.name().firstName();
     }
 
-    public static String getCVC(){
+    public static String getCVC() {
         return faker.numerify("###");
     }
 
-    public static String getInvalidCVC(){
+    public static String getInvalidCVC() {
         return faker.numerify("##");
     }
 }

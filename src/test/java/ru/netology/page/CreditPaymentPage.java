@@ -1,6 +1,5 @@
 package ru.netology.page;
 
-import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
@@ -9,10 +8,10 @@ import ru.netology.data.DataHelper;
 import java.time.Duration;
 
 import static com.codeborne.selenide.CollectionCondition.allMatch;
+import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
-import static com.codeborne.selenide.CollectionCondition.size;
 
 public class CreditPaymentPage {
 
@@ -32,7 +31,7 @@ public class CreditPaymentPage {
         creditTitle.shouldBe(visible);
     }
 
-    public void creditPaymentByApprovedCard(int plusMonth, int plusYear){
+    public void creditPaymentByApprovedCard(int plusMonth, int plusYear) {
         cardNumberField.setValue(DataHelper.getApprovedCardNumber());
         monthField.setValue(DataHelper.getMonth(plusMonth));
         yearField.setValue(DataHelper.getYear(plusYear));
@@ -42,7 +41,7 @@ public class CreditPaymentPage {
         successNotification.shouldBe(visible, Duration.ofSeconds(15));
     }
 
-    public void creditPaymentByDeclinedCard(int plusMonth, int plusYear){
+    public void creditPaymentByDeclinedCard(int plusMonth, int plusYear) {
         cardNumberField.setValue(DataHelper.getDeclinedCardNumber());
         monthField.setValue(DataHelper.getMonth(plusMonth));
         yearField.setValue(DataHelper.getYear(plusYear));
@@ -52,14 +51,14 @@ public class CreditPaymentPage {
         unSuccessNotification.shouldBe(visible, Duration.ofSeconds(15));
     }
 
-    public void emptyCreditPaymentForm(){
+    public void emptyCreditPaymentForm() {
         continueButton.click();
         invalidFormatFields.shouldBe(size(5)).shouldBe(allMatch("все поля содержат текст: " +
                 "Поле обязательно для заполнения", e -> e.getText().contains("Поле обязательно для заполнения")));
 
     }
 
-    public void creditPaymentWithOnlyFistNameOwner(int plusMonth, int plusYear){
+    public void creditPaymentWithOnlyFistNameOwner(int plusMonth, int plusYear) {
         cardNumberField.setValue(DataHelper.getApprovedCardNumber());
         monthField.setValue(DataHelper.getMonth(plusMonth));
         yearField.setValue(DataHelper.getYear(plusYear));
